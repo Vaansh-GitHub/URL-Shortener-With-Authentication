@@ -1,6 +1,7 @@
 <h1>URL Shortener</h1>
-<p>Design a URl shortener service that takes in a valid URL and
-returns a shortened URL,redirecting the user to the previously provided URL.
+<p>Design a URL shortener service that takes in a valid URL and
+returns a shortened URL,redirecting the user to the previously provided URL. But the twist is that User needs to first login.
+As the authentication service i have currently added is STATEFUL so whenever the browser updates the state also updates.
 </p>
 
 <p>Also keep track of total visits/click on the URL
