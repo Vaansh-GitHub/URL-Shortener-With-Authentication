@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        p{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <form method="POST" action="/login">
+        <label>Email</label>
+        <input type="email" placeholder="example@xxx.com" required name="email">
+        <label>Password</label>
+        <input type="password" placeholder="password" required name="password">
+        <input type="submit" placeholder="Login">
+    </form>
+    <% if (locals.err) { %>
+       <p><%= locals.err %></p>
+    <% } %>
+</body>
+</html>

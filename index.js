@@ -1,8 +1,13 @@
 const express=require("express");
 const {connectMongoDb}=require("./connection");
+
 const urlRouter= require("./routes/urlRoutes")
 const staticRouter= require("./routes/staticRoutes")
-const {URL}=require("./models/urlModels")
+const signUpRouter=require("./routes/authRoutes");
+const loginRouter=require("./routes/loginRoutes");
+const cookieParser = require('cookie-parser');
+const {restrictedUserLoginOnly}=require("./middlewares/auth")
+
 const path=require("path");
 
 const app=express();
@@ -16,17 +21,12 @@ app.set("views",path.resolve("./views"));
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser())
 
 //Routes
-app.use("/url",urlRouter);
 app.use("/",staticRouter);
-app.get("/:id", async (req,res)=>{
-    const short_url=req.params.id;
-    const result=await URL.findOneAndUpdate({short_url},{
-        $push:{
-            times_visited:{timestamps:Date.now()}
-        }})
-    res.redirect(result.url);
-})//I have written this get request here as because if i add it in urlRoutes it will be shown as /url/:id which has no request here
+app.use("/url",restrictedUserLoginOnly,urlRouter);
+app.use("/signup",signUpRouter);
+app.use("/login",loginRouter);
 
 app.listen(PORT,()=>{console.log('Server started at PORT',PORT);});

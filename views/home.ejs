@@ -20,7 +20,7 @@
 <body>
     <h1>URL Shortener</h1>
     <% if (locals.id) { %>
-        <p>Generated URL is = <%= "http://localhost:8000/" +locals.id %>
+        <p>Generated URL is = <%= "http://localhost:8000/url/" +locals.id %>
         </p>
         <% } %>
             <form method="POST" action="/url">
@@ -47,7 +47,7 @@
                                         <%= index+1 %>
                                     </td>
                                     <td>
-                                        <%= "http://localhost:8000/" +url.short_url %>
+                                        <%= "http://localhost:8000/url/" +url.short_url %>
                                     </td>
                                     <td>
                                         <%= url.url %>
